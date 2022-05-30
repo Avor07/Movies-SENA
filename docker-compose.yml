@@ -1,0 +1,22 @@
+services:
+  database:
+    image: mysql
+    container_name: database
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: true
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: movies
+    ports:
+    - 3306:3306
+
+  php-apache:
+    container_name: php-apache
+    build:
+      context: ./php
+    ports:
+      - 8080:80
+    volumes:
+      - .:/var/www/MOVIES-SENA
+      - ./apache/default.conf:/etc/apache2/sites-enabled/000-default.conf
+    depends_on:
+      - database
