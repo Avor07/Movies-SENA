@@ -1,1 +1,1 @@
-composer install
+php composer install
